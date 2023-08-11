@@ -1,3 +1,4 @@
+""" Главный цикл программы """
 import json
 import os.path
 
@@ -20,8 +21,9 @@ def main() -> list[System]:
 
         for table in system.get_tables():
             with open(os.path.join(DATA_DIR, f'{system.name}_{table.name}.csv'), 'w') as f:
-                f.write(table.get_header())
-                f.writelines(table.get_data())
+                f.write(table.get_header() + '\n')
+                for line in table.get_data():
+                    f.write(line + '\n')
 
     return systems
 
